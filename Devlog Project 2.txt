@@ -1,0 +1,44 @@
+Devlog.txt
+
+April 12th 9:00 PM
+
+Thoughts on the project structure: 
+
+Threads and Roles:
+
+Teller threads (3) that handle transactions
+Customer threads (50) that request services
+Main thread that coordinates startup and shutdown
+
+
+Shared Resources:
+
+Safe (limited to 2 tellers at once)
+Manager (only 1 teller at a time)
+Door (only 2 customers can enter at once)
+Teller availability
+  
+
+Synchronization Requirements:
+
+Customers need to queue when all tellers are busy
+Tellers need exclusive access to the manager for withdrawal approvals
+Limited access to the safe for both deposits and withdrawals
+Controlled customer flow through the bank entrance
+
+
+April 14th 1:00 PM
+
+First full Implementation done. Output is not completely correct and the format is off slightly, but the main structure of the threads and shared resources is complete. 
+
+To fix: 
+1. Initial deadlock when customers tried to acquire tellers
+2. Output formatting inconsistencies
+3. Difficulty coordinating teller-customer handoffs 
+
+April 14th 10:00 PM
+
+Fixed tellerAvailable semaphore initialization to start as available (permits=1). Fixed more semaphore initializations and I had to improve the customer queue management to properly signal the next customer when one leaves.
+
+
+
